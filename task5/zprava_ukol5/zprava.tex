@@ -52,7 +52,7 @@
 	\subsection{Implementace obecně}
 		Idea byla vše maximálně zapouzdřit a využít tak objektových možností jazyka Python. První implementovanou třídou je třída \textit{problem}. Tato třída obsahuje řešenou formuli (dvojrozměné pole, či v případě pythonové terminologie spíše dvojrozměrný list), pole s vahami jednotlivých proměnných, proměnné udávající počet proměnných, počet klauzulí a pole objektů \textit{chromosome}.
 		
-		Toto pole má velikost danou velikostí populace. Každý objekt v sobě ukládá svou fitness, počet proměnných, odkaz na třídu \textit{problem} a bitový vektor pro uložení hodnot. Objekt \textit{chromosome} dále implementuje metody inicializace, mutace, křížení (druhým parametrem je jiný chromosom) a výpočtu fitness. Výpočet fitness je volán vždy na konci volání konstruktoru. Tím je dosaženo maximálního zapouzdření a v případě použití heuristiky pro jiný problém stačí vyměnit fitness funkci a inicializační část konstruktoru. Návrh objektu \textit{chromosome} funguje s libovolným objektem mající atribut \textit{present}.
+		Toto pole má velikost danou velikostí populace. Každý objekt v sobě ukládá svou fitness, počet proměnných, odkaz na třídu \textit{problem} a bitový vektor pro uložení hodnot. Objekt \textit{chromosome} dále implementuje metody inicializace, mutace, křížení (druhým parametrem je jiný chromosom) a výpočtu fitness. Výpočet fitness je volán vždy na konci volání konstruktoru. Tím je dosaženo maximálního zapouzdření a v případě použití heuristiky pro jiný problém stačí vyměnit fitness funkci a inicializační část konstruktoru.
 		
 		Výše zmíněná inicializační část je sama o sobě zajímavá. Pokud je konstruktor volán s příznakem \textit{init = 1}, je provedena inicializace bitového vektoru náhodným binárním řetězcem. To opět způsobuje další zapouzdření.
 		
@@ -102,7 +102,7 @@
 		\item počet jedinců v turnaji = 5.
 	\end{itemize}
 	
-	První dva parametry byly voleny tak, aby byly, dle autorova názoru, větší něž je nutné pro formule s 20 proměnnými a 91 klauzulemi. Na takovýchto formulích byla testovány všechna nastavení. Všechna zde uvedené měření jsou průměry několika běhů se stejnými parametry/formulemi. Kromě času je vše zaokrouhleno na celá čísla.
+	První dva parametry byly voleny tak, aby byly, dle autorova názoru, větší něž je nutné pro formule s 20 proměnnými a 91 klauzulemi. Na takovýchto formulích byla testována všechna nastavení (výjimky jsou uvedeny). Všechna zde uvedené měření jsou průměry několika běhů se stejnými parametry/formulemi. Kromě času je vše zaokrouhleno na celá čísla.
 	
 	\subsection{Pravděpodobnost křížení}
 		Na sadě dvaceti formulí specifikace výše byl proveden test pro nastavení pravděpodobnosti křížení. Jako primární kriterium byla zvolena suma cen přes všechny formule.  Druhým kriteriem pak byla doba výpočtu. Naměřené hodnoty uvádí tabulka \ref{table-krizeni}.
@@ -179,7 +179,7 @@
 		Z tabulky \ref{table-turnaj} je jasně vidět, že ideální velikostí turnaje je 12. Rozdíly v době běhu nebyly nijak zvlášt patrné. Detailní měřená data jsou v příloze.
 	
 	\subsection{Velikost populace}
-		Tento test byl nejextenzivnější a, spolu s testem max. počtu populací, nejnáročnější na HW počítače. Testovány byly velikosti populací od 50 do 1000 při krocích po padesáti. Primární je, jako téměř vždy, sumární cena instancí. Samozřejmě je však ještě důležitější najít nějaké řešení, což je v sumární ceně zahrnuto principem penalizace popsaným výše. Dále pak ale je \textbf{velmi} důležité sledovat dobu výpočtu, protože výpočetní složitost roste přímo úměrně velikosti populace.
+		Tento test byl nejextenzivnější a, spolu s testem max. počtu populací, nejnáročnější na HW počítače. Testovány byly velikosti populací od 50 do 1000 při krocích po padesáti. Primární je, jako téměř vždy, sumární cena instancí. Samozřejmě je však ještě důležitější najít nějaké řešení, což je v sumární ceně zahrnuto principem penalizace popsaným výše. Dále pak ale je \textbf{velmi} důležité sledovat dobu výpočtu, protože výpočetní složitost roste přímo úměrně velikosti populace. (Z toho plyne, že menší hodnota je lepší.)
 		
 		\begin{tabular}{cccccccccccc} \label{table-pop-size}
 		\\
@@ -204,7 +204,7 @@
 		
 		Tento test byl proveden na sadě 100 formulí o 50 proměnných a 148 klauzulích. Zde je již jistá pravděpodobnost, že formuli algoritmus nebude schopen vyřešit. Je však stále ještě poměrně malá.
 		
-	Pět z těchto 100 formulí nebyl algoritmus v 1000 populacích schopen. V ostatních případech byl průměrný počet generací k vyřešení problému 64,21 a maximální počet generací byl 342. Výsledky všech měření jsou v příloze. Nutno dodat, že při opakovaném běhu byly všechny dříve nevyřešené formule vyřešeny. Vzhledem k náročnosti tohoto testu (celý na testovacím stroji trvá cca 3 hodiny) nebyl opakován a výsledky nebyly průměrovány. V případě opakovaného spouštění je pravděpodobnost vyřešení všech instancí velmi vysoká. Výsledky měření, včetně časů, jsou v příloze.
+	Pět z těchto 100 formulí nebyl algoritmus v 1000 populacích schopen vyřešit. V ostatních případech byl průměrný počet generací k vyřešení problému 64,21 a maximální počet generací byl 342. Výsledky všech měření jsou v příloze. Nutno dodat, že při opakovaném běhu pouze na konkrétních instancích byly všechny dříve nevyřešené formule vyřešeny. Vzhledem k náročnosti tohoto testu (celý na testovacím stroji trvá cca 3 hodiny) nebyl opakován celý a výsledky nebyly průměrovány. V případě opakovaného spouštění je pravděpodobnost vyřešení všech instancí velmi vysoká. Výsledky měření, včetně časů, jsou v příloze.
 	
 	Vzhledem k brzkému \enquote{zaříznutí} běhu hned po vyřešení byl maximální počet generací nastaven na 400. Této hodnoty je dosahováno málokdy.
 	
