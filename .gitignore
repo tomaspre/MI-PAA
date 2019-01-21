@@ -1,0 +1,12 @@
+*.aux
+*.bcf
+*.log
+*.out
+*.run.xml
+*.gz
+*.bak
+*minted*
+*.zip
+*.cfg
+
+*data-for-benchmarks/*

@@ -192,9 +192,23 @@
 	\subsection{Velikost populace}
 		Tento test byl nejextenzivnější a, spolu s testem max. počtu populací, nejnáročnější na HW počítače. Testovány byly velikosti populací od 50 do 1000 při krocích po padesáti. Primární je, jako téměř vždy, sumární cena instancí. Samozřejmě je však ještě důležitější najít nějaké řešení, což je v sumární ceně zahrnuto principem penalizace popsaným výše. Dále pak ale je \textbf{velmi} důležité sledovat dobu výpočtu, protože výpočetní složitost roste přímo úměrně velikosti populace.
 		
-		--tabulka--
+		\begin{tabular}{cccccccccccc} \label{table-pop-size}
+		\\
+		Vel. pop. & 50 & 100 & 150 & 200 & 250 & 300 & 350 & 400 \\
+		Sum. hodnota & 7166&7055	&7116	&8123&	8966	&9149&	9765&	9189	\\
+		Nespl. klauz.  & 6	&4&	3	&2	&1&	1	&0&	1\\
+		\hline
+		Vel. pop. & 450 & 500 & 550 & 600 & 650 & 700 & 750 & 800\\
+		Sum. hodnota &9749&	9274	&9553	&9796&	9023&	9131&	9839&	9810\\
+		Nespl. klauz. &0	&1&	0	&0	&1&	1&	0	&0 \\
+		\hline
+ 		Vel. pop. & 850 & 900 & 950 & 1000\\
+		Sum. hodnota & 9921	&9768&	9780	&9779\\
+		Nespl. klauz.&	0&	0	&0&	0\\\\
+		\\
+		\end{tabular}
 		
-		--výsledky--
+		Vzhledem k výsledkům uvedeným v tabulce \ref{table-pop-size} byla vybrána hodnota parametru 600. Měření ukazují na velmi dobrou fitness a zároveň se nejedná o příliš vysokou hodnotu, která by mohla výrazně zpomalovat výpočty.
 	
 	\subsection{Max. počet populací}
 		Posledním testem byl test ideálního limitu pro počet populací. Tento test probíhal jinak, než ty předchozí. Parametr byl nastaven na velmi vysokou hodnotu (1000) a program byl modifikován tak, aby vypisoval maximální dosaženou generaci (ta je v případě nalezení řešení limitována výše popsaným parametrem). V případě nenalezení řešení bylo nutné projít všech 1000 generací.	
@@ -222,13 +236,30 @@
 \section{Experimentální část}
 	Ačkoli by se již předchozí kapitola dala nazvat experimentální částí, pojedná tato kapitola o různých experimentech provedených za pomocí algoritmu s výše uvedenými parametry.
 	
-	\includegraphics[scale=1]{graf-vyvoj-20-91.png} 
-file:///Users/Tom/MI-PAA/task5/zprava_ukol5/graf-vyvoj-50-148.png
-file:///Users/Tom/MI-PAA/task5/zprava_ukol5/graf-vyvoj-nesplnitelna.png
-
-	-graf vývoje f na 20/91
-	-graf vývoje f na 50/148
-	-graf vývoje f prvního a druhého prvku na nesplnitelné formuli
+	Na grafu \ref{graf-vyvoj-20} je vidět vývoj relativní fitness pro několik formulí o 20 proměnných a 91 klauzulích. Jak je vidět, algoritmus pro tyto jednoduché formule skončí velice brzy a vývoj fitness je strmý.
+	
+	Relativní fitness je zde zavedena z toho důvodu, aby pro všechny instance stačilo jedno měřítko na ypsilonové ose grafu. ($fitness(current) / fitness(max)$)
+	\begin{figure}[h]\centering
+		\includegraphics[width=0.99\textwidth]{graf-vyvoj-20-91.png} 
+		\caption{Vývoj relitivní fitness pro formuli s 20 proměnnými a 91 klauzulemi}
+		\label{graf-vyvoj-20}
+	\end{figure}
+	
+	Na grafu \ref{graf-vyvoj-50} je vidět vývoj relativní fitness pro pár formulí 50/148. Tyto formule už nejsou tak jednoduché a bylo potřeba projít více generací. Navíc u žluté formule označené C je vidět, že kolem 42 generace došlo k přegenerování populace a následnému strmému růstu fitness. Jedná se o důkaz, že zvolená technika je opravdu funkční.
+	
+	\begin{figure}[h]\centering
+		\includegraphics[width=0.99\textwidth]{graf-vyvoj-50-148.png} 
+		\caption{Vývoj relitivní fitness pro formuli s 50 proměnnými a 148 klauzulemi}
+		\label{graf-vyvoj-50}
+	\end{figure}
+	
+	Na grafu \ref{graf-nesplnitelna} je vidět vývoj fitness nejlepšího a druhého nejlepšího chromosomu u nesplnitelné formule. Ideální jedinec rychle dokonverguje k lokálnímu optimu, zatímco na druhém je možné pozorovat restarty s generováním nové populace.
+	
+	\begin{figure}[h]\centering
+		\includegraphics[width=0.99\textwidth]{graf-vyvoj-nesplnitelna.png} 
+		\caption{Vývoj fitness pro nesplnitelnou formuli s 50 proměnnými a 218 klauzulemi}
+		\label{graf-nesplnitelna}
+	\end{figure}
 
 	
 \section{Závěr}
