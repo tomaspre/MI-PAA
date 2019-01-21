@@ -1,19 +1,8 @@
- % arara: xelatex: {shell: true}
-% arara: biber
-% arara: xelatex: {shell: true}
-% arara: xelatex: {shell: true}
-
-% Podklad k cvičení v předmětu BI-DPR
-% autor: Ondřej Guth (ondrej.guth@fit.cvut.cz)
-% (c) FIT ČVUT, 2018
-
-
 \documentclass[a4paper]{article}
 \usepackage{polyglossia}
 \setmainlanguage{czech}
 \usepackage{xevlna,xltxtra}
 \usepackage{csquotes}
-%\usepackage[style=german]{csquotes} % pro starší verze, kde není čeština
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{graphicx}
@@ -222,15 +211,15 @@
 	\subsection{Shrnutí}
 		Byly provedeny tisíce měření, detailní výsledky všech se nachází v příloze, pro určení ideálních nastavení parametrů algoritmu. Výsledné parametry jsou následující:
 		\begin{itemize}
-		\item velikost populace = 600,
-		\item maximální počet populací = 400,
-		\item penalizace za každou nesplněnou klauzuli = 10,
-		\item pravděpodobnost mutace (\%) = 18,
-		\item pravděpodobnost křížení (\%) = 40,
-		\item maximální počet generací (když je formule splněna) beze změny nejlepší fitness = 20,
-		\item kolika se má předchozí parametr vynásobit, pokud formule není splněna = 2,
-		\item počet jedinců v turnaji = 12.
-	\end{itemize}
+			\item velikost populace = 600,
+			\item maximální počet populací = 400,
+			\item penalizace za každou nesplněnou klauzuli = 10,
+			\item pravděpodobnost mutace (\%) = 18,
+			\item pravděpodobnost křížení (\%) = 40,
+			\item maximální počet generací (když je formule splněna) beze změny nejlepší fitness = 20,
+			\item kolika se má předchozí parametr vynásobit, pokud formule není splněna = 2,
+			\item počet jedinců v turnaji = 12.
+		\end{itemize}
 	
 
 \section{Experimentální část}
@@ -261,8 +250,24 @@
 		\label{graf-nesplnitelna}
 	\end{figure}
 
+	Algoritmus byl testován i na větších zadáních (např. 50/218 ze stejného zdroje, jako všechna ostatní zadání). Bohužel na testovacím HW, který je téměř 8 let starý nebylo možné úlohy vyřešit. V případě dostupnosti výkonnějšího HW by mělo stačit proporcionálně zvětšit velkost populace a algoritmus by neměl mít problém větší zadání řešit.
 	
 \section{Závěr}
+	Cílem tohoto zadání byla jednak implementace genetického algoritmu, dále pak jeho testování a přizpůsobení pro problém vážené splnitelnosti booleovské formule. Tyto cíle byly splněny. Po nastavení parametrů na experimentálně ověřené hodnoty je algoritmus bez problému schopen pracovat s formulemi do velikosti cca 150 klauzulí. V případě, že by byl použit výkonnější HW a zvýšena velikost populace, bylo by možné algoritmus použít i pro výrazně větší problémy.
+	
+	Celkově algoritmus pracuje velmi dobře. V momentech zaseknutí v lokálním optimu dochází k částečným restartům, které tento problém efektivně řeší. Ještě jednou je vhodné zopakovat, že veškerá měření se nachází v příloze jakožto csv soubory.
+	
+	Nastavení parametru jsou následující:
+	\begin{itemize}
+			\item velikost populace = 600,
+			\item maximální počet populací = 400,
+			\item penalizace za každou nesplněnou klauzuli = 10,
+			\item pravděpodobnost mutace (\%) = 18,
+			\item pravděpodobnost křížení (\%) = 40,
+			\item maximální počet generací (když je formule splněna) beze změny nejlepší fitness = 20,
+			\item kolika se má předchozí parametr vynásobit, pokud formule není splněna = 2,
+			\item počet jedinců v turnaji = 12.
+	\end{itemize}
  %RESETOVAT SMC!!!!!!!!!!!
  %vybrat rýžovar
  %objednat Hue
